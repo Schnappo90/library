@@ -1,13 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+    <div class="page-container">
+        <h1>The Book Library</h1>
+        <h2>My Book Collection</h2>
+        <button class="open-modal">+ Add Book</button>
+        <button class="filter">Filter</button>
+        <div class="book-library-display">
+            <!-- <div class="test book-info-card">
+                <h4>Book Title</h4>
+                <p>Author</p>
+                <p>523 Pages</p>
+                <button class="hasRead">&#9989; Read</button>
+                <button class="removeBook">Remove</button>
+            </div>
+
+            <div class="test book-info-card">
+                <h4>Book Two</h4>
+                <p>Alexander Knapp</p>
+                <p>312 Pages</p>
+                <button class="hasRead">Read</button>
+                <button class="removeBook">Remove</button>
+            </div> -->
+        </div>
+
+        <dialog class="modal">
+        <form action="" id="add-book-form" method="dialog">
+            <h3>Add Book To Library</h3>
+            <div class="text-input">
+                <div class="title-group">
+                    <label for="title"></label>
+                    <input type="text" name="title" id="title" placeholder="Book Title *" required />
+                </div>
+
+                <div class="author-group">
+                    <label for="author"></label>
+                    <input type="text" name="author" id="author" placeholder="Author" />
+                </div>
+                <div class="pages-group">
+                    <label for="pages"></label>
+                    <input type="number" name="pages" id="pages" placeholder="Pages" />
+                </div>
+            </div>
+
+            <div class="radio-buttons">
+                <input type="radio" id="check-read" name="read" value="true" checked />
+                <label for="check-read">Read</label>
+                <input type="radio" id="check-unread" name="read" value="false" />
+                <label for="check-unread">Unread</label>
+            </div>
+
+            <button class="submit">Add To Library</button>
+            <button class="close-modal">Close</button>
+        </form>
+        </dialog>
+
+    </div>
     <script src="app.js"></script>
 </body>
+
 </html>

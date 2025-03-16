@@ -7,12 +7,16 @@ function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
+  this.read = read === "true";
+  this.id = self.crypto.randomUUID();
+  this.toggleReadStatus = function() {
+        this.read = !this.read;
+      }
+  };
+
   this.info = function () {
     return `${this.title} by ${this.author}, ${this.pages} Pages, Read: ${this.read}`;
   };
-  this.id = self.crypto.randomUUID();
-}
 
 function addBookToLibrary(title, author, pages, read) {
   let newBook = new Book(title, author, pages, read);
@@ -22,15 +26,6 @@ function addBookToLibrary(title, author, pages, read) {
 function displayLibrary(myLibrary) {
   return myLibrary.map();
 }
-
-// addBookToLibrary("The Best", "Alex", 342, false);
-// addBookToLibrary("Empireland", "Sathnam Sanghera", 256, true);
-// addBookToLibrary(
-//   "Empireworld: How British Imperialism Has Shaped the Globe",
-//   "Sathnam Sanghera",
-//   448,
-//   true
-// );
 
 let bookForm = document.getElementById("add-book-form");
 let bookTitleInput = document.getElementById("title");
@@ -51,16 +46,22 @@ closeModal.addEventListener("click", () => {
 
 bookForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  let bookTitleValue = bookTitleInput.value;
-  let authorValue = authorInput.value;
-  let pageValue = pagesInput.value;
 
-  addBookToLibrary(bookTitleValue, authorValue, pageValue, false);
+  let bookTitleValue = bookTitleInput.value.trim();
+  let authorValue = authorInput.value.trim();
+  let pageValue = pagesInput.value.trim();
+  let radioInput = document.querySelector('input[name="read"]:checked').value;
+
+  if (!bookTitleValue || !authorValue || !pageValue) {
+    alert("Please fill out all fields before submitting.");
+    return;
+  }
+
+  addBookToLibrary(bookTitleValue, authorValue, pageValue, radioInput);
   displayBooksOnPage(myLibrary);
 
-  bookTitleInput.value = "";
-  authorInput.value = "";
-  pagesInput.value = "";
+  bookForm.reset();
+  modal.close();
 });
 
 const bookContainer = document.querySelector(".book-library-display");
@@ -74,7 +75,7 @@ function displayBooksOnPage(myLibrary) {
   card.setAttribute("data-id", lastBook.id);
 
   // Create and append the title
-  const bookTitle = document.createElement("h3");
+  const bookTitle = document.createElement("h4");
   bookTitle.textContent = lastBook.title;
   card.appendChild(bookTitle);
 
@@ -88,17 +89,61 @@ function displayBooksOnPage(myLibrary) {
   pagesInfo.textContent = `${lastBook.pages} Pages`;
   card.appendChild(pagesInfo);
 
+
+  const readStatus = document.createElement("button");
+  if(lastBook.read === true) {
+    readStatus.classList.add("hasRead");
+    readStatus.innerHTML = "&#9989; Read";
+    }
+    else {
+        readStatus.classList.add("hasRead", "unread");
+    readStatus.innerHTML = "&#10060; Not Read";
+    } 
+    card.appendChild(readStatus);
+
+    readStatus.addEventListener('click', () => {
+        lastBook.toggleReadStatus();
+    }
+    )
+
+  
+
+  // Create 'has read' button for each book
+//   const readStatus = document.createElement("button");
+//   if (lastBook.userReadStatus() === true) { 
+//     readStatus.classList.add("hasRead");
+//     readStatus.innerHTML = "&#9989; Read";
+
+//   } 
+//   else {
+//     readStatus.classList.add("hasRead", "unread");
+//     readStatus.innerHTML = "&#10060; Not Read";
+//   }
+
+//   card.appendChild(readStatus);
+
+//   read.addEventListener('click', () => {
+//     if(lastBook.userReadStatus() === true) {
+//         lastBook.userReadStatus = false;
+//         readStatus.classList.add("hasRead", "unread");
+//         readStatus.innerHTML = "&#10060; Not Read";
+//     } else {
+//         readStatus.classList.add("hasRead");
+//         readStatus.innerHTML = "&#9989; Read";
+//     }
+//   })
+
   // 🔹 Create a new remove button for each book
   const removeBook = document.createElement("button");
   removeBook.classList.add("removeBook");
-  removeBook.textContent = "Delete From Library";
+  removeBook.textContent = "Remove";
   card.appendChild(removeBook);
 
   // Add event listener to remove button
   removeBook.addEventListener("click", (e) => {
-    let bookIndex = myLibrary.findIndex(book => book.id === lastBook.id);
-    if(bookIndex !== -1) {
-        myLibrary.splice(bookIndex, 1);
+    let bookIndex = myLibrary.findIndex((book) => book.id === lastBook.id);
+    if (bookIndex !== -1) {
+      myLibrary.splice(bookIndex, 1);
     }
     card.remove(); // Remove the card from the page
   });
@@ -106,8 +151,4 @@ function displayBooksOnPage(myLibrary) {
   bookContainer.appendChild(card);
 }
 
-removeBook.addEventListener("click", (e) => {
-  console.log(e);
-});
-
-// displayBooksOnPage(myLibrary);
+function createCard() {}

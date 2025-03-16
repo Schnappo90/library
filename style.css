@@ -1,0 +1,183 @@
+/* Global */
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: "Noto Sans", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.page-container {
+    margin: 0 100px;
+}
+
+h1,
+h2,
+h3 {
+    margin: 20px 0;
+}
+
+.hide {
+    display: none;
+}
+
+/* Form Elements */
+
+.modal {
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.877);
+    width: 350px;
+    padding: 20px;
+    transition: ease-in 1s;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="text"], input[type="number"] {
+    border: none;
+    border-radius: 2px;
+    background-color: rgb(233, 232, 232);
+    height: 30px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.filter,
+.submit,
+.open-modal,
+.close-modal,
+.removeBook {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 150px;
+    height: 40px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.open-modal:hover {
+    color: grey;
+}
+
+.filter,.open-modal {
+    display: inline-block;
+}
+
+.open-modal:active {
+    background-color: rgb(225, 225, 225);
+}
+
+.submit {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(57, 185, 123);
+    color: white;
+    font-weight: 600;
+}
+
+.removeBook {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(198, 95, 95);
+    color: white;
+    font-weight: 600;
+    align-self: center;
+}
+
+/* Library Display Elements */
+
+.book-library-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px
+}
+
+.book-info-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    background-color: rgb(239, 239, 239);
+    border-radius: 5px;
+}
+
+h4 {
+    font-weight: 900;
+}
+
+.book-info-card p {
+    font-size: 0.8rem;
+}
+
+.hasRead {
+    color: rgb(3, 165, 3);
+    font-weight: 900;
+    border: none;
+    padding: 0;
+    align-self: flex-start;
+    cursor: pointer;
+}
+
+.hasRead:hover {
+    color:rgb(1, 133, 1)
+}
+
+.unread {
+    color: red;
+    font-weight: 900;
+    border: none;
+    padding: 0;
+    align-self: flex-start;
+    cursor: pointer;
+}
+
+.unread:hover {
+    color: rgb(188, 2, 2);
+}
+
+.radio-buttons {
+    margin-bottom: 20px;
+}
